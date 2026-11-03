@@ -17,6 +17,7 @@ import {
   X,
   Landmark,
 } from "lucide-react";
+import EmployeeOnlineForm from "@/components/forms/EmployeeOnline_form";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -47,10 +48,10 @@ const navigation = [
     icon: Archive,
   },
   {
-    title: "Send Document",
-    url: "/document/send",
-    icon: Send,
-  },
+  title: "Send Document",
+  url: "/employee-online",
+  icon: Send,
+},
 ];
 
 interface AppSidebarProps {

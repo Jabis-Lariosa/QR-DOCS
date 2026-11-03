@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "@/auth/login";
@@ -10,6 +9,9 @@ import IncomingSubmissions from "@/pages/incoming-submissions";
 
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import GuestOnlineForm from "@/components/forms/GuestOnline_form";
+import EmployeeOnlineForm from "@/components/forms/EmployeeOnline_form";
+import ReviewDocuments from "@/pages/review-documents";
+import ScanDocument from "@/pages/scan-document";
 
 export default function App() {
   return (
@@ -23,14 +25,38 @@ export default function App() {
         {/* Dashboard layout with sidebar */}
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+
           <Route
             path="/receive-document"
             element={<ReceiveDocument />}
           />
+
           <Route
             path="/records/incoming"
             element={<IncomingSubmissions />}
           />
+
+          {/* Employee Online Form */}
+          <Route
+            path="/employee-online"
+            element={
+              <EmployeeOnlineForm
+                employee={{
+                  // Temporary placeholder data
+                } as any}
+              />
+            }
+            
+          />
+          <Route
+  path="/documents/received"
+  element={<ReviewDocuments />}
+/>
+
+<Route
+  path="/scan-document"
+  element={<ScanDocument />}
+/>
         </Route>
 
         {/* Public guest form */}
