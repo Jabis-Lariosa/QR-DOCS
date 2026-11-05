@@ -45,20 +45,6 @@ interface DocumentRecord {
   fileUrl?: string;
 }
 
-type SubmissionType = "Employee" | "Department";
-
-interface DocumentRecord {
-  id: string;
-  trackingNo: string;
-  documentName: string;
-  sender: string;
-  department: string;
-  subject: string;
-  dateSubmitted: string;
-  status: "Pending" | "Received";
-  submissionType: SubmissionType;
-  fileUrl?: string;
-}
 
 const initialDocuments: DocumentRecord[] = [
   {

@@ -16,8 +16,9 @@ import {
   UserRound,
   X,
   Landmark,
+  ShieldCheck,
 } from "lucide-react";
-import EmployeeOnlineForm from "@/components/forms/EmployeeOnline_form";
+
 
 import { Button } from "@/components/ui/button";
 import {
@@ -52,6 +53,11 @@ const navigation = [
   url: "/employee-online",
   icon: Send,
 },
+{
+  title: "Validate Documents",
+  url: "/documents/validation",
+  icon: ShieldCheck,
+}
 ];
 
 interface AppSidebarProps {
