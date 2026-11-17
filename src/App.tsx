@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "@/auth/login";
@@ -6,12 +7,13 @@ import Signup from "@/auth/signup";
 import Dashboard from "@/pages/dashboard";
 import ReceiveDocument from "@/pages/receive-document";
 import IncomingSubmissions from "@/pages/incoming-submissions";
-
-import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import EmployeeOnlineForm from "@/components/forms/global_form";
 import ReviewDocuments from "@/pages/review-documents";
 import ScanDocument from "@/pages/scan-document";
-import DocumentValidation from "./pages/document-validation";
+import DocumentTracking from "@/pages/document-tracking";
+import DocumentRecords from "@/pages/document-records";
+import SendDocumentPage from "@/pages/send-document";
+
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
 
 export default function App() {
   return (
@@ -26,42 +28,44 @@ export default function App() {
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
 
+          {/* Document Submission */}
           <Route
             path="/receive-document"
             element={<ReceiveDocument />}
           />
 
           <Route
+            path="/employee-online"
+            element={<SendDocumentPage />}
+          />
+
+          {/* Incoming Documents */}
+          <Route
             path="/records/incoming"
             element={<IncomingSubmissions />}
           />
 
-          {/* Employee Online Form */}
+          {/* Document Management */}
           <Route
-            path="/employee-online"
-            element={
-              <EmployeeOnlineForm
-                employee={{
-                  // Temporary placeholder data
-                } as any}
-              />
-            }
-            
+            path="/documents/records"
+            element={<DocumentRecords />}
           />
+
           <Route
-  path="/documents/received"
-  element={<ReviewDocuments />}
-/>
+            path="/documents/received"
+            element={<ReviewDocuments />}
+          />
 
-<Route
-  path="/scan-document"
-  element={<ScanDocument />}
-/>
+          <Route
+            path="/documents/tracking"
+            element={<DocumentTracking />}
+          />
 
-<Route
-  path="/documents/validation"
-  element={<DocumentValidation />}
-/>
+          {/* QR Scanner */}
+          <Route
+            path="/scan-document"
+            element={<ScanDocument />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

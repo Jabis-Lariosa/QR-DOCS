@@ -15,17 +15,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import EmployeeOnlineForm from "@/components/forms/global_form";
+import GlobalDocumentForm from "@/components/forms/global_form";
 
 export default function ReceiveDocument() {
   const navigate = useNavigate();
-
-  // Replace with your actual authenticated employee data.
-  const employee = {
-    id: "EMP-001",
-    name: "Employee Name",
-    department: "ICT OFFICE",
-  };
 
   return (
     <div className="min-h-screen bg-muted/40">
@@ -82,7 +75,7 @@ export default function ReceiveDocument() {
           </CardHeader>
 
           <CardContent>
-            <EmployeeOnlineForm employee={employee} />
+            <GlobalDocumentForm />
           </CardContent>
         </Card>
 

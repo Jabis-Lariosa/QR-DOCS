@@ -66,17 +66,7 @@ const actionOptions = [
   "Other",
 ];
 
-type Employee = {
-  id: string;
-  name: string;
-  department: string;
-};
-
-type Props = {
-  employee: Employee;
-};
-
-export default function EmployeeOnlineForm({ employee }: Props) {
+export default function GlobalDocumentForm() {
   const [form, setForm] = useState<IntakeForm>(makeInitialForm);
 
   const [receivingOffices, setReceivingOffices] = useState<
@@ -154,32 +144,32 @@ export default function EmployeeOnlineForm({ employee }: Props) {
     }
 
     const record = {
-      id: crypto.randomUUID(),
-      ...form,
+  id: crypto.randomUUID(),
+  ...form,
 
-      channel: "EMPLOYEE_ONLINE",
+  channel: "GLOBAL_ONLINE",
 
-      receivedAt: new Date().toISOString(),
+  submittedAt: new Date().toISOString(),
 
-      // Automatically enters Document Records
-      status: "PENDING",
+  status: "PENDING",
 
-      // Initial receiving offices and their instructions
-      receivingOffices: receivingOffices.map((office) => ({
-        ...office,
-        status: "PENDING",
-        receivedAt: null,
-        completedAt: null,
-      })),
+  receivingOffices: receivingOffices.map((office) => ({
+    ...office,
+    status: "PENDING",
+    receivedAt: null,
+    completedAt: null,
+  })),
 
-      submittedBy: employee.id,
-      employeeName: employee.name,
-      department: employee.department,
+  submitter: {
+    name: form.clientName,
+    cellphoneNo: form.cellphoneNo,
+    organization: form.schoolOthers,
+  },
 
-      attachment: file.name,
+  attachment: file.name,
 
-      officialRegistration: false,
-    };
+  officialRegistration: false,
+};
 
     console.log("New Document Record:", record);
 
@@ -213,13 +203,13 @@ export default function EmployeeOnlineForm({ employee }: Props) {
     >
       {/* HEADER */}
       <header className="border-b border-slate-200 pb-4">
-        <h2 className="text-xl font-bold tracking-tight sm:text-2xl">
-          Employee Document Submission
-        </h2>
-        <p className="mt-1 text-sm text-slate-500">
-          Submit and route an internal document to the appropriate offices.
-        </p>
-      </header>
+  <h2 className="text-xl font-bold tracking-tight sm:text-2xl">
+    Global Document Submission
+  </h2>
+  <p className="mt-1 text-sm text-slate-500">
+    Submit a document and route it to the appropriate receiving offices.
+  </p>
+</header>
 
       {/* DOCUMENT INFORMATION */}
       <section className="space-y-4">
@@ -493,31 +483,7 @@ export default function EmployeeOnlineForm({ employee }: Props) {
         </div>
       </section>
 
-      {/* EMPLOYEE DETAILS */}
-      <section className="space-y-3">
-        <h3 className="font-semibold">Employee / Department</h3>
-
-        <div className="grid gap-3 sm:grid-cols-3">
-          <input
-            readOnly
-            aria-label="Employee Name"
-            className={`${inputClass} bg-slate-50`}
-            value={employee.name}
-          />
-          <input
-            readOnly
-            aria-label="Employee ID"
-            className={`${inputClass} bg-slate-50`}
-            value={employee.id}
-          />
-          <input
-            readOnly
-            aria-label="Department"
-            className={`${inputClass} bg-slate-50`}
-            value={employee.department}
-          />
-        </div>
-      </section>
+     
 
       {/* ATTACHMENT */}
       <section className="space-y-2">

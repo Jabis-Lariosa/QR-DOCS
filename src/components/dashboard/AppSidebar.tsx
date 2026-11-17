@@ -16,7 +16,8 @@ import {
   UserRound,
   X,
   Landmark,
-  ShieldCheck,
+ShieldCheck,
+   Route,
 } from "lucide-react";
 
 
@@ -54,9 +55,9 @@ const navigation = [
   icon: Send,
 },
 {
-  title: "Validate Documents",
-  url: "/documents/validation",
-  icon: ShieldCheck,
+  title: "Document Tracking",
+  url: "/documents/tracking",
+  icon: Route,
 }
 ];
 
