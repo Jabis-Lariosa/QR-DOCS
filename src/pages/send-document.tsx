@@ -1,5 +1,5 @@
 
-import EmployeeOnlineForm from "@/components/forms/EmployeeOnline_form";
+import EmployeeOnlineForm from "@/components/forms/global_form";
 
 export default function SendDocumentPage() {
   // Temporary data. Replace with the authenticated employee's details.

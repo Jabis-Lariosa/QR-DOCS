@@ -8,8 +8,7 @@ import ReceiveDocument from "@/pages/receive-document";
 import IncomingSubmissions from "@/pages/incoming-submissions";
 
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import GuestOnlineForm from "@/components/forms/GuestOnline_form";
-import EmployeeOnlineForm from "@/components/forms/EmployeeOnline_form";
+import EmployeeOnlineForm from "@/components/forms/global_form";
 import ReviewDocuments from "@/pages/review-documents";
 import ScanDocument from "@/pages/scan-document";
 import DocumentValidation from "./pages/document-validation";
@@ -64,16 +63,6 @@ export default function App() {
   element={<DocumentValidation />}
 />
         </Route>
-
-        {/* Public guest form */}
-        <Route
-          path="/guest-online"
-          element={
-            <main className="min-h-screen bg-muted/40 px-5 py-10 sm:px-10">
-              <GuestOnlineForm />
-            </main>
-          }
-        />
       </Routes>
     </BrowserRouter>
   );

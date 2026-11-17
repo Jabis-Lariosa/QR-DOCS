@@ -1,13 +1,10 @@
 
-import { useState } from "react";
 import {
   ArrowLeft,
-  ClipboardList,
-  FileInput,
-  Mail,
   QrCode,
   ScanLine,
 } from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
@@ -18,41 +15,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import WalkInPaperForm from "@/components/forms/Walk-InPaper_form";
-import OfficialEmailReferralForm from "@/components/forms/OfficialEmailReferralForm";
-
-type IntakeChannel = "walk-in" | "email" | "qr";
-
-const intakeOptions = [
-  {
-    id: "walk-in" as const,
-    title: "Walk-in Paper",
-    description: "Receive and record physical documents.",
-    icon: FileInput,
-  },
-  {
-    id: "email" as const,
-    title: "Official Email",
-    description: "Record official emails and referrals.",
-    icon: Mail,
-  },
-  {
-    id: "qr" as const,
-    title: "QR Code Scanning",
-    description: "Receive employee and department submissions by scanning QR codes.",
-    icon: QrCode,
-  },
-];
+import EmployeeOnlineForm from "@/components/forms/global_form";
 
 export default function ReceiveDocument() {
   const navigate = useNavigate();
 
-  const [activeForm, setActiveForm] =
-    useState<IntakeChannel>("walk-in");
-
-  const activeOption = intakeOptions.find(
-    (option) => option.id === activeForm
-  );
+  // Replace with your actual authenticated employee data.
+  const employee = {
+    id: "EMP-001",
+    name: "Employee Name",
+    department: "ICT OFFICE",
+  };
 
   return (
     <div className="min-h-screen bg-muted/40">
@@ -81,105 +54,64 @@ export default function ReceiveDocument() {
 
       <main className="mx-auto max-w-7xl space-y-6 px-4 py-8 sm:px-6">
         {/* Page Heading */}
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">
-            Document Intake
-          </h2>
-          <p className="mt-2 text-muted-foreground">
-            Select how the incoming document will be received and recorded.
-          </p>
+        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight">
+              Document Intake
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              Submit and route documents to the appropriate receiving offices.
+            </p>
+          </div>
+
+          <Button
+            variant="outline"
+            onClick={() => navigate("/scan-document")}
+          >
+            <ScanLine className="mr-2 size-4" />
+            Scan Document
+          </Button>
         </div>
 
-        {/* Intake Options */}
-        <div className="grid gap-3 md:grid-cols-3">
-          {intakeOptions.map((option) => {
-            const Icon = option.icon;
-            const selected = activeForm === option.id;
-
-            return (
-              <button
-                key={option.id}
-                type="button"
-                onClick={() => setActiveForm(option.id)}
-                aria-pressed={selected}
-                className={`rounded-xl border bg-background p-4 text-left transition-all duration-200 ${
-                  selected
-                    ? "border-primary bg-primary/5 ring-2 ring-primary/20"
-                    : "hover:border-primary/50 hover:bg-muted/30"
-                }`}
-              >
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon className="size-5 text-primary" />
-                  </div>
-
-                  {selected && (
-                    <span className="text-xs font-medium text-primary">
-                      Selected
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="font-semibold">
-                  {option.title}
-                </h3>
-
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {option.description}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Selected Intake Form */}
+        {/* Global Document Form */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <ClipboardList className="size-5" />
-              {activeOption?.title} Intake
+            <CardTitle>
+              Document Submission Form
             </CardTitle>
           </CardHeader>
 
           <CardContent>
-            {activeForm === "walk-in" && (
-              <WalkInPaperForm />
-            )}
+            <EmployeeOnlineForm employee={employee} />
+          </CardContent>
+        </Card>
 
-            {activeForm === "email" && (
-              <OfficialEmailReferralForm />
-            )}
+        {/* QR Scanner Information */}
+        <Card>
+          <CardContent className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                <QrCode className="size-6 text-primary" />
+              </div>
 
-            {activeForm === "qr" && (
-              <div className="flex flex-col items-center justify-center py-10 text-center">
-                <div className="mb-4 flex size-16 items-center justify-center rounded-2xl bg-primary/10">
-                  <ScanLine className="size-8 text-primary" />
-                </div>
-
-                <h3 className="text-xl font-semibold">
-                  Scan Incoming Document
+              <div>
+                <h3 className="font-semibold">
+                  Receive Submitted Documents
                 </h3>
-
-                <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                  Scan the QR code generated from an Employee Online Form
-                  or Department Document Submission to verify and receive
-                  the document.
-                </p>
-
-                <Button
-                  className="mt-6"
-                  onClick={() => navigate("/scan-document")}
-                >
-                  <QrCode className="mr-2 size-4" />
-                  Open QR Scanner
-                </Button>
-
-                <p className="mt-3 text-xs text-muted-foreground">
-                  QR verification is required before marking a document
-                  as received.
+                <p className="text-sm text-muted-foreground">
+                  Scan a submitted document's QR code to verify and update
+                  its receiving status.
                 </p>
               </div>
-            )}
+            </div>
+
+            <Button
+              onClick={() => navigate("/scan-document")}
+              className="shrink-0"
+            >
+              <QrCode className="mr-2 size-4" />
+              Open QR Scanner
+            </Button>
           </CardContent>
         </Card>
       </main>
