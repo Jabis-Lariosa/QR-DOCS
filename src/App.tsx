@@ -5,6 +5,7 @@ import Login from "@/auth/login";
 import Signup from "@/auth/signup";
 
 import Dashboard from "@/pages/dashboard";
+import ClientDashboard from "@/pages/client-dashboard";
 import ReceiveDocument from "@/pages/receive-document";
 import IncomingSubmissions from "@/pages/incoming-submissions";
 import ReviewDocuments from "@/pages/review-documents";
@@ -14,6 +15,10 @@ import DocumentRecords from "@/pages/document-records";
 import SendDocumentPage from "@/pages/send-document";
 
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import ClientDashboardLayout from "@/components/dashboard/ClientDashboardLayout";
+import ClientSubmitDocument from "@/pages/client-submit-document";
+import ClientDocuments from "@/pages/client-documents";
+import ClientTracking from "@/pages/client-tracking";
 
 export default function App() {
   return (
@@ -66,6 +71,17 @@ export default function App() {
             path="/scan-document"
             element={<ScanDocument />}
           />
+        </Route>
+
+        {/* Separate client portal */}
+        <Route element={<ClientDashboardLayout />}>
+          <Route path="/client-dashboard" element={<ClientDashboard />} />
+          <Route
+            path="/client/submit-document"
+            element={<ClientSubmitDocument />}
+          />
+          <Route path="/client/documents" element={<ClientDocuments />} />
+          <Route path="/client/tracking" element={<ClientTracking />} />
         </Route>
       </Routes>
     </BrowserRouter>
